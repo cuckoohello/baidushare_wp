@@ -3,22 +3,17 @@
 Plugin Name: 百度分享按钮
 Plugin URI: http://share.baidu.com
 Description: <a href="http://share.baidu.com/" target="_blank">百度分享</a>是一个提供网页地址收藏、分享及发送的WEB2.0按钮工具，借助百度分享按钮，网站的浏览者可以方便的分享内容到人人网、开心网、QQ空间、新浪微博等一系列SNS站点。 网站主可以在百度分享网站中获得分享按钮JS代码，嵌入到自己的网站，让网站链接分享到互联网各个角落！通过百度分享按钮，您的网站的浏览者可以便捷得分享您网站上的内容到人人网、开心网、qq空间、新浪微博等SNS站点进行传播，为您的网站带回更多的流量。通过百度分享按钮，您网站上的网页将更容易被百度搜索引擎所发现，从而有机会从百度搜索带回更多的流量。通过百度分享按钮，后续您还可以免费获取详尽的分享统计分析，了解网民将您网站上哪些内容分享到哪些SNS网站，每日的分享次数是多少，帮您更好得的跟踪、分析、激励用户的分享行为，为网站带来更多的流量。（该功能即将开放，敬请期待）赶紧免费获取百度分享按钮，获取更多的流量，您还等什么呢？<a href="options-general.php?page=baidu_share.php">启用插件后，可以点击这里进行配置</a>。
-Version: 0.1.0.0
-Author: Baidu (China) Co., Ltd.
-Author URI: http://share.baidu.com
+Version: 0.1.0.1
+Author: Yafeng Shan
+Author URI: http://blog.kokonur.me
 */
 
-$b_option_tmp['code']='<!-- Baidu Button BEGIN -->
-    <div id="bdshare" class="bdshare_b" style="line-height: 12px;"><img src="http://share.baidu.com/static/images/type-button-1.jpg" /></div>
-    <script type="text/javascript" id="bdshare_js" data="type=button&amp;uid=0" ></script>
-    <script type="text/javascript" id="bdshell_js"></script>
-    <script type="text/javascript">
-        document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
-    </script>
-<!-- Baidu Button END -->';
+$b_option_tmp['code']='<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","douban","fbook","linkedin","twi"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+';
 $b_option_tmp['position'] = 2;
 $b_option_tmp['content'] = 1;
-$b_option_str = implode('|', $b_option_tmp);
+$b_option_str = implode('%', $b_option_tmp);
 $b_option = get_option('b_option');
 if($b_option == '') {
 	update_option('b_option', $b_option_str);
@@ -28,7 +23,7 @@ add_filter('the_content', 'b_content');
 function b_content($content) {
     if(is_page() || is_single()) {
 		$tmp = get_option('b_option');
-		$arr = explode('|', $tmp);
+		$arr = explode('%', $tmp);
 		$b_option = $arr[0];
 		if($arr[2] == 2) {
 			$b_option=str_replace('<div id="bdshare"' , '<div id="bdshare" data="{\'text\':\'' . htmlspecialchars_decode(preg_replace('/\\n|\\r|\\t/m',' ',preg_replace('/<[^>].*?>/m' , '' , $content))) . '\'}"' , $b_option);
@@ -36,10 +31,10 @@ function b_content($content) {
 		/**/
 		$b_option=htmlspecialchars_decode($b_option);
 		if($arr[1] == 2) {
-			$content = $content.'<br />'."<div style='float:left'>".$b_option.'</div><br /><br /><br />';
+			$content = $content."<div style='float:left'>".$b_option.'</div><br /><br />';
 		}
 		else {
-			$content = '<br />'."<div style='float:left'>".$b_option.'</div><br /><br /><br />'.$content;
+			$content = '<br />'."<div style='float:left'>".$b_option.'</div><br /><br />'.$content;
 		}
 	}
 	return $content;
@@ -52,7 +47,7 @@ function b_widget() {
 			return;
 		}
         extract($args);
-		$arr = explode('|', get_option('b_option'));
+		$arr = explode('%', get_option('b_option'));
 		$b_option = htmlspecialchars_decode($arr[0]);
         echo $before_widget;
         echo $before_title . '百度分享按钮' . $after_title;
@@ -75,14 +70,14 @@ function b_option_add() {
 				$b_option_tmp['code'] = stripslashes_deep($_POST['b_code']);
 				$b_option_tmp['position'] = $_POST['b_pos'];
 				$b_option_tmp['content'] = $_POST['b_con'];
-				$b_option_str = implode('|', $b_option_tmp);
+				$b_option_str = implode('%', $b_option_tmp);
 				update_option('b_option', $b_option_str);
 				$b_upd = true;
 			}
 		}
     }
 	$tmp = get_option('b_option');
-	$arr = explode('|', $tmp);
+	$arr = explode('%', $tmp);
     echo '<div class="wrap">';
     echo '<form name="b_form" method="post" action="">';
     echo '<p style="font-weight:bold;">请在此处输入您从百度分享网站上获得的分享按钮Javascript代码。<a href="http://share.baidu.com" target="_blank"><u style="color:blue">请点击此处访问百度分享网站</u></a></p>';
@@ -105,4 +100,4 @@ function b_option_add() {
 	echo '</form>';
 	
 	echo '</div>';
-}
+}<?php
