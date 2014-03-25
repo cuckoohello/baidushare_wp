@@ -9,10 +9,9 @@ Author URI: http://blog.kokonur.me
 */
 
 $b_option_tmp['code']='<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","douban","fbook","linkedin","twi"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","douban","fbook","linkedin","twi"]}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>
 ';
 $b_option_tmp['position'] = 2;
-$b_option_tmp['content'] = 1;
 $b_option_str = implode('%', $b_option_tmp);
 $b_option = get_option('b_option');
 if($b_option == '') {
@@ -25,10 +24,6 @@ function b_content($content) {
 		$tmp = get_option('b_option');
 		$arr = explode('%', $tmp);
 		$b_option = $arr[0];
-		if($arr[2] == 2) {
-			$b_option=str_replace('<div id="bdshare"' , '<div id="bdshare" data="{\'text\':\'' . htmlspecialchars_decode(preg_replace('/\\n|\\r|\\t/m',' ',preg_replace('/<[^>].*?>/m' , '' , $content))) . '\'}"' , $b_option);
-		}
-		/**/
 		$b_option=htmlspecialchars_decode($b_option);
 		if($arr[1] == 2) {
 			$content = $content."<div style='float:left'>".$b_option.'</div><br /><br />';
@@ -66,14 +61,11 @@ function b_option_add() {
 	$b_upd = false;
     if($_POST['b_code'] != '') {
 		if($_POST['b_pos'] != '') {
-			if($_POST['b_con'] != '') {
-				$b_option_tmp['code'] = stripslashes_deep($_POST['b_code']);
-				$b_option_tmp['position'] = $_POST['b_pos'];
-				$b_option_tmp['content'] = $_POST['b_con'];
-				$b_option_str = implode('%', $b_option_tmp);
-				update_option('b_option', $b_option_str);
-				$b_upd = true;
-			}
+			$b_option_tmp['code'] = stripslashes_deep($_POST['b_code']);
+			$b_option_tmp['position'] = $_POST['b_pos'];
+			$b_option_str = implode('%', $b_option_tmp);
+			update_option('b_option', $b_option_str);
+			$b_upd = true;
 		}
     }
 	$tmp = get_option('b_option');
@@ -92,12 +84,9 @@ function b_option_add() {
 	echo '<input type="radio" name="b_pos" value="1" ' . ($arr[1] == 1 ? 'checked="checked"' : '') . ' /> 文章上方&nbsp;&nbsp;';
 	echo '<input type="radio" name="b_pos" value="2" ' . ($arr[1] == 2 ? 'checked="checked"' : '') . ' /> 文章下方&nbsp;&nbsp;';
 	echo '<br /><br />';
-	echo '分享内容 ：&nbsp;&nbsp;';
-	echo '<input type="radio" name="b_con" value="1" ' . ($arr[2] == 1 ? 'checked="checked"' : '') . ' /> 文章标题&nbsp;&nbsp;';
-	echo '<input type="radio" name="b_con" value="2" ' . ($arr[2] == 2 ? 'checked="checked"' : '') . ' /> 文章内容&nbsp;&nbsp;';
 	echo '<p class="submit"><input type="submit" value="保存设置"/>';
 	echo '<input type="button" value="返回上级" onclick="window.location.href=\'plugins.php\';" /></p>';
 	echo '</form>';
 	
 	echo '</div>';
-}<?php
+}
