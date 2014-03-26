@@ -73,7 +73,7 @@ function b_option_add() {
     echo '<div class="wrap">';
     echo '<form name="b_form" method="post" action="">';
     echo '<p style="font-weight:bold;">请在此处输入您从百度分享网站上获得的分享按钮Javascript代码。<a href="http://share.baidu.com" target="_blank"><u style="color:blue">请点击此处访问百度分享网站</u></a></p>';
-	echo '<p>默认嵌入的代码风格为按钮式标准风格，显示在文章下方，分享内容为文章标题+链接</p>';
+	echo '<p>默认嵌入的代码风格为按钮式标准风格，显示在文章下方</p>';
     
     echo '<p><textarea style="height:300px;width:750px" name="b_code">' . $arr[0] . '</textarea></p>';
 	if($b_upd) {
