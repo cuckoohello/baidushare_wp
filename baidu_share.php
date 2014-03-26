@@ -3,7 +3,7 @@
 Plugin Name: 百度分享按钮
 Plugin URI: https://github.com/cuckoohello/baidushare_wp
 Description: <a href="http://share.baidu.com/" target="_blank">百度分享</a>是一个提供网页地址收藏、分享及发送的WEB2.0按钮工具，借助百度分享按钮，网站的浏览者可以方便的分享内容到人人网、开心网、QQ空间、新浪微博等一系列SNS站点。 网站主可以在百度分享网站中获得分享按钮JS代码，嵌入到自己的网站，让网站链接分享到互联网各个角落！通过百度分享按钮，您的网站的浏览者可以便捷得分享您网站上的内容到人人网、开心网、qq空间、新浪微博等SNS站点进行传播，为您的网站带回更多的流量。通过百度分享按钮，您网站上的网页将更容易被百度搜索引擎所发现，从而有机会从百度搜索带回更多的流量。通过百度分享按钮，后续您还可以免费获取详尽的分享统计分析，了解网民将您网站上哪些内容分享到哪些SNS网站，每日的分享次数是多少，帮您更好得的跟踪、分析、激励用户的分享行为，为网站带来更多的流量。（该功能即将开放，敬请期待）赶紧免费获取百度分享按钮，获取更多的流量，您还等什么呢？<a href="options-general.php?page=baidu_share.php">启用插件后，可以点击这里进行配置</a>。
-Version: 1.0.3
+Version: 1.0.4
 Author: Yafeng Shan
 Author URI: http://blog.kokonur.me
 */

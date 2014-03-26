@@ -5,9 +5,9 @@ Plugin URI: https://github.com/cuckoohello/baidushare_wp
 Tags: share, baidu, baidushare,百度分享，follow,passit,share,bookmark,follow,weibo,sina,qq,social,sns,kaixin001,renren,douban
 Requires at least: 2.8.0
 Tested up to: 3.8.2
-Stable tag: 1.0.2
+Stable tag: 1.0.4
 
-百度分享是一个提供网页地址收藏、分享及发送的WEB2.0按钮工具，借助百度分享按钮，网站的浏览者可以方便的分享内容到人人网、开心网、QQ空间、新浪微博等一系列SNS站点。
+百度分享是一个提供网页地址收藏、分享及发送的WEB2.0按钮工具。
 
 == Description ==
 = 百度分享 =
@@ -48,6 +48,9 @@ Stable tag: 1.0.2
 3. 插件后台配置预览
 
 == Changelog ==
+
+= 1.0.4 =
+* 解决readme short description超长问题
 
 = 1.0.3 =
 * 增加wordpress要求所需readme.txt
